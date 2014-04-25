@@ -3,9 +3,11 @@
 <ul>
   <strong>Click a game to play!</strong>
   <% @games.each do |g| %>
-    <li> <%=link_to g.name, played_games_path(game: {game_id: g.id}), method: :post  %> | created by: <%= User.find(g.user_id).email %></li>
+    <% if g.user_id != nil %>
+     <li> <%=link_to g.name, played_games_path(game: {game_id: g.id}), method: :post  %> | created by: <%= User.find(g.user_id).email %></li>
     <li></li>
   <% end %>
+<% end %>
 </ul>
 
 
