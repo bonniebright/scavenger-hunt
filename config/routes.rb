@@ -4,5 +4,5 @@ MapsScavengerHunt::Application.routes.draw do
   resources :guesses
   resources :games
   resources :played_games
-  root to: 'locations#index'
+  root to: 'games#index'
 end

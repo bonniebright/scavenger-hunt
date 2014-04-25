@@ -4,23 +4,24 @@ class PlayedGamesController < ApplicationController
   end
 
   def new
-    @played_game = Played_game.new
+    @playedgame = PlayedGame.new
   end
 
   def create
-   @played_game = Played_game.create(game_id: params[:game_id], user_id: current_user.id)
-    redirect_to played_game_path(@played_game)
+   @playedgame = PlayedGame.create(game_id: params[:game][:game_id], user_id: current_user.id)
+
+   redirect_to played_game_path(@playedgame)
   end
 
   def show
     respond_to do |f|
       f.html do
         @guess = Guess.new
-        @played_game = Played_game.find(params[:id])
-        @clues = @played_game.game.clues
+        @playedgame = PlayedGame.find(params[:id])
+        @clues = @playedgame.game.clues
       end
       f.js do
-        @guesses = @played_game.guesses
+        @guesses = @PlayedGame.guesses
       end
     end
   end

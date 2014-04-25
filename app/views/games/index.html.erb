@@ -1,59 +1,15 @@
 <h1> all of the games </h1>
 
-<% @games.each do |g| %>
-  <%= g.user_id %>
-  <%= g.name %>
-  <%= g.location.latitude %>
-  <%= g.location.longitude %>
-<% end %>
-
-
-<%= javascript_tag  do %>
-  $(document).ready(function(){
-  var map;
-  function initialize() {
-    var myLatlng = new google.maps.LatLng("<%= j @game.location.latitude %>","<%= j @game.location.longitude %>");
-    var mapOptions = {
-      zoom: 4,
-      center: myLatlng
-
-    }
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Hello World!'});
-  }
-
-
-  function placeMarker(location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-
-
-    map.setCenter(location);
-    google.maps.event.clearListeners(map,'click')
-
-  }
+<ul>
+  <strong>Click a game to play!</strong>
+  <% @games.each do |g| %>
+    <li> <%=link_to g.name, played_games_path(game: {game_id: g.id}), method: :post  %> | created by: <%= User.find(g.user_id).email %></li>
+    <li></li>
+  <% end %>
+</ul>
 
 
 
 
 
-
-  google.maps.event.addDomListener(window, 'load', initialize);
- });
-
-
-
-<% end %>
-
-
-
-<div id="map-canvas">
-
-</div>
 
