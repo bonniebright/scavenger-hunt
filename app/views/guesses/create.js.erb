@@ -1,4 +1,15 @@
 
 var guesses = <%= raw  @guesses.to_json %>
-console.log(guesses[-1])
-$('.clue:hidden').first().show();
+last = guesses.pop()
+
+latlng = new google.maps.LatLng(last.latitude, last.longitude);
+
+locationlatlng = new google.maps.LatLng(<%= @played_game.game.location.latitude %>, <%= @played_game.game.location.longitude %>);
+
+
+distance = google.maps.geometry.spherical.computeDistanceBetween(latlng, locationlatlng);
+
+
+distance = Math.ceil(distance/1000);
+
+$('.clue:hidden').first().show().append(" You are: " + distance + " km away");

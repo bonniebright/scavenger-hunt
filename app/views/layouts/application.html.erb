@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= content_for?(:title) ? yield(:title)+" | Scavenger Hunt" : "Scavenger Hunt" %></title>
-  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDRmO5W40zix_0cTkQ1Nwr2d8DOHv8py54&sensor=false" %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDRmO5W40zix_0cTkQ1Nwr2d8DOHv8py54&sensor=false&libraries=geometry" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= csrf_meta_tags %>
   <%= javascript_include_tag "application" %>
